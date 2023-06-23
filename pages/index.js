@@ -3,10 +3,12 @@ import { useState } from "react";
 import styles from "./index.module.css";
 
 export default function Home() {
-  const [animalInput, setAnimalInput] = useState("");
+  const [coding, setCoding] = useState("");
+  const [desctiption, setDesctiption] = useState("");
   const [result, setResult] = useState();
 
   async function onSubmit(event) {
+    setResult("Loading...");
     event.preventDefault();
     try {
       const response = await fetch("/api/generate", {
@@ -14,7 +16,7 @@ export default function Home() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ animal: animalInput }),
+        body: JSON.stringify({ coding, desctiption }),
       });
 
       const data = await response.json();
@@ -23,7 +25,6 @@ export default function Home() {
       }
 
       setResult(data.result);
-      setAnimalInput("");
     } catch(error) {
       // Consider implementing your own error handling logic here
       console.error(error);
@@ -40,18 +41,31 @@ export default function Home() {
 
       <main className={styles.main}>
         <img src="/dog.png" className={styles.icon} />
-        <h3>Name my pet</h3>
+        <h3>Unit tests generator</h3>
         <form onSubmit={onSubmit}>
-          <input
+          <textarea
             type="text"
-            name="animal"
-            placeholder="Enter an animal"
-            value={animalInput}
-            onChange={(e) => setAnimalInput(e.target.value)}
+            name="coding"
+            rows="4" 
+            cols="50"
+            placeholder="Enter your code"
+            value={coding}
+            onChange={(e) => setCoding(e.target.value)}
           />
-          <input type="submit" value="Generate names" />
+          <br/>
+          <textarea
+            type="text"
+            name="description"
+            rows="4" 
+            cols="50"
+            placeholder="Enter your explaination about code"
+            value={desctiption}
+            onChange={(e) => setDesctiption(e.target.value)}
+          />
+          <br/>
+          <input type="submit" value="Generate" />
         </form>
-        <div className={styles.result}>{result}</div>
+        <pre>{result}</pre>
       </main>
     </div>
   );
