@@ -65,7 +65,7 @@ export default function Home() {
           <br/>
           <input type="submit" value="Generate" />
         </form>
-        <pre style="width:80%;">{result}</pre>
+        <pre>{result}</pre>
       </main>
     </div>
   );
