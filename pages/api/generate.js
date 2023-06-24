@@ -1,15 +1,15 @@
 import { OpenAI } from "langchain/llms/openai";
 import { minify } from "terser";
 
-const model = new OpenAI();
+const model = new OpenAI({maxTokens: -1, streaming: true});
 
 export default async function (req, res) {
   const coding = req.body.coding || '';
-  const desctiption = req.body.desctiption || '';
+  const description = req.body.description || '';
 
   try {
     const minifyCode = await minify(coding);
-    const createCompletionRequest = generatePrompt(minifyCode.code, desctiption);
+    const createCompletionRequest = generatePrompt(minifyCode.code, description);
     const answer = await model.call(createCompletionRequest);
     res.status(200).json({ result: answer });
   } catch (error) {
@@ -28,6 +28,6 @@ export default async function (req, res) {
   }
 }
 
-function generatePrompt(coding, desctiption) {
-  return `I want at least 5 unit tests in Jest for the following code: ${coding} | the code can do: ${desctiption}. No need for an explaination`;
+function generatePrompt(coding, description) {
+  return `Generate unit tests in Jest to cover all cases for the following code: ${coding} | the code can do: ${description}. The outcome should be a file that contains Jest unit tests without any explanations`;
 }
