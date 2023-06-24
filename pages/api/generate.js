@@ -1,7 +1,7 @@
 import { OpenAI } from "langchain/llms/openai";
 import { minify } from "terser";
 
-const model = new OpenAI({maxTokens: -1, streaming: true});
+const model = new OpenAI({maxTokens: -1});
 
 export default async function (req, res) {
   const coding = req.body.coding || '';
