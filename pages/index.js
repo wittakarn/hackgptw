@@ -4,7 +4,7 @@ import styles from "./index.module.css";
 
 export default function Home() {
   const [coding, setCoding] = useState("");
-  const [desctiption, setDesctiption] = useState("");
+  const [description, setDescription] = useState("");
   const [result, setResult] = useState();
 
   async function onSubmit(event) {
@@ -16,7 +16,7 @@ export default function Home() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ coding, desctiption }),
+        body: JSON.stringify({ coding, description }),
       });
 
       const data = await response.json();
@@ -59,8 +59,8 @@ export default function Home() {
             rows="8" 
             cols="100"
             placeholder="Enter your explaination about code"
-            value={desctiption}
-            onChange={(e) => setDesctiption(e.target.value)}
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
           />
           <br/>
           <input type="submit" value="Generate" />
