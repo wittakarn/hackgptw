@@ -46,8 +46,8 @@ export default function Home() {
           <textarea
             type="text"
             name="coding"
-            rows="4" 
-            cols="50"
+            rows="8" 
+            cols="100"
             placeholder="Enter your code"
             value={coding}
             onChange={(e) => setCoding(e.target.value)}
@@ -56,8 +56,8 @@ export default function Home() {
           <textarea
             type="text"
             name="description"
-            rows="4" 
-            cols="50"
+            rows="8" 
+            cols="100"
             placeholder="Enter your explaination about code"
             value={desctiption}
             onChange={(e) => setDesctiption(e.target.value)}
@@ -65,7 +65,7 @@ export default function Home() {
           <br/>
           <input type="submit" value="Generate" />
         </form>
-        <pre>{result}</pre>
+        <pre style="width:80%;">{result}</pre>
       </main>
     </div>
   );
