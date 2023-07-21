@@ -21,11 +21,14 @@ export default function Home() {
 
       const data = await response.json();
       if (response.status !== 200) {
-        throw data.error || new Error(`Request failed with status ${response.status}`);
+        throw (
+          data.error ||
+          new Error(`Request failed with status ${response.status}`)
+        );
       }
 
       setResult(data.result);
-    } catch(error) {
+    } catch (error) {
       // Consider implementing your own error handling logic here
       console.error(error);
       alert(error.message);
@@ -46,26 +49,26 @@ export default function Home() {
           <textarea
             type="text"
             name="coding"
-            rows="8" 
+            rows="8"
             cols="100"
             placeholder="Enter your code"
             value={coding}
             onChange={(e) => setCoding(e.target.value)}
           />
-          <br/>
+          <br />
           <textarea
             type="text"
             name="description"
-            rows="8" 
+            rows="8"
             cols="100"
             placeholder="Enter your explaination about code"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
           />
-          <br/>
+          <br />
           <input type="submit" value="Generate" />
         </form>
-        <pre style={{width: "80%"}}>{result}</pre>
+        <pre style={{ width: "80%" }}>{result}</pre>
       </main>
     </div>
   );
